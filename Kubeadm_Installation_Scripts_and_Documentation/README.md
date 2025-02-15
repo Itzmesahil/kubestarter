@@ -65,6 +65,9 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     ```bash
     sudo swapoff -a
     ```
+    Remove Swap Entry from /etc/fstab
+    To prevent swap from being enabled on reboot, edit the /etc/fstab file:
+    # /swapfile none swap sw 0 0 <<< # comment
 
 2. **Load Necessary Kernel Modules**: Required for Kubernetes networking.
     ```bash
@@ -109,7 +112,7 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     sudo systemctl status containerd
     ```
 
-5. **Install Kubernetes Components**:
+5. **Install Kubernetes Components**: {Update as per the Requirement line:- 120,122 version }
     ```bash
     sudo apt-get update
     sudo apt-get install -y apt-transport-https ca-certificates curl gpg
@@ -137,7 +140,7 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
     ```
 
-3. **Install a Network Plugin (Calico)**:
+3. **Install a Network Plugin (Calico is for Prod)**:
     ```bash
     kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yaml
     ```
