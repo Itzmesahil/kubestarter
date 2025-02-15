@@ -67,9 +67,11 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     ```
     Remove Swap Entry from /etc/fstab
     To prevent swap from being enabled on reboot, edit the /etc/fstab file:
+   ```
     # /swapfile none swap sw 0 0 <<< # comment
+    ```
 
-2. **Load Necessary Kernel Modules**: Required for Kubernetes networking.
+3. **Load Necessary Kernel Modules**: Required for Kubernetes networking.
     ```bash
     cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
     overlay
@@ -80,7 +82,7 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     sudo modprobe br_netfilter
     ```
 
-3. **Set Sysctl Parameters**: Helps with networking.
+4. **Set Sysctl Parameters**: Helps with networking.
     ```bash
     cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
     net.bridge.bridge-nf-call-iptables  = 1
@@ -93,7 +95,7 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     lsmod | grep overlay
     ```
 
-4. **Install Containerd**:
+5. **Install Containerd**:
     ```bash
     sudo apt-get update
     sudo apt-get install -y ca-certificates curl
@@ -112,7 +114,7 @@ This guide outlines the steps needed to set up a Kubernetes cluster using `kubea
     sudo systemctl status containerd
     ```
 
-5. **Install Kubernetes Components**: {Update as per the Requirement line:- 120,122 version }
+6. **Install Kubernetes Components**: {Update as per the Requirement line:- 120,122 (stable:/v1.29) version }
     ```bash
     sudo apt-get update
     sudo apt-get install -y apt-transport-https ca-certificates curl gpg
